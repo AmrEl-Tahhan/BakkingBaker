@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">BakkingBaker</string>
+    <string name="textview">TextView</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Measure">measure</string>
+    <string name="Quantity">quantity</string>
+    <string name="Ingredient">ingredient</string>
+    <string name="measure">Measure</string>
+    <string name="step_image">step image</string>
+    <string name="previous">Previous</string>
+    <string name="position">Position</string>
+    <string name="next">Next</string>
+    <string name="shortDescription">lorem ipsum this is a short description for the recipe step</string>
+    <string name="Description">Full Description for the step. Full Description for the step. Full Description for the step. Full Description for the step. Full Description for the step. Full Description for the step. Full Description for the step. Full Description for the step. Full Description for the step. Full Description for the step.</string>
+    <string name="widget_ingredient_text">ingredient shown here.ingredient shown here.ingredient shown here.ingredient shown here.ingredient shown here</string>
+    <string name="set_widget">Set as Widget</string>
+    <string name="updated">widget data is updated</string>
+</resources>
