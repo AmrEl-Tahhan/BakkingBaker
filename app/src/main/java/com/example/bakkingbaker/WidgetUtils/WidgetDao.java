@@ -1,12 +1,9 @@
 package com.example.bakkingbaker.WidgetUtils;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-
-import com.example.bakkingbaker.Room.Category;
 import com.example.bakkingbaker.Room.WidgetCategory;
 
 @Dao
