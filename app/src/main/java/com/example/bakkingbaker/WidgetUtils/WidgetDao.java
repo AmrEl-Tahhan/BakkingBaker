@@ -1,5 +1,4 @@
 package com.example.bakkingbaker.WidgetUtils;
-
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
