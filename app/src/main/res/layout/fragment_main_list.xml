@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainFragment_id"
     tools:context=".MainListFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_margin="16dp"
+        android:fontFamily="@font/dancing_scripts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="@string/tasty"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:id="@+id/recyclerView_id"
@@ -14,4 +21,4 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+</LinearLayout>

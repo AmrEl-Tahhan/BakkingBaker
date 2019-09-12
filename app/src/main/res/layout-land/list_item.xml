@@ -18,7 +18,7 @@
 
         <TextView
             android:id="@+id/recipe_textView"
-            android:layout_width="300dp"
+            android:layout_width="600dp"
             android:layout_height="110dp"
             android:background="@drawable/cake"
             android:fontFamily="@font/dancing_scripts"

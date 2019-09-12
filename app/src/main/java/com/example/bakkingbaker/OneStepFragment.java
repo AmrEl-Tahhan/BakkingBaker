@@ -43,10 +43,13 @@ public class OneStepFragment extends Fragment {
 
     private TextView shortDescription;
     private TextView description;
+    private TextView previousTV;
+    private TextView positionTV;
+    private TextView nextTV;
+
     private SimpleExoPlayer mExoPlayer;
     private PlayerView mPlayerView;
 
-    BottomNavigationView navigation;
 
 
     public OneStepFragment() {
@@ -75,19 +78,28 @@ public class OneStepFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_one_step, container, false);
-        navigation = rootView.findViewById(R.id.bottomNavigationView);
         final Parcelable[] mStepArray =  getArguments().getParcelableArray(STEP_TAG);
         final int mPosition = getArguments().getInt(POSITION_TAG);
         final Step mStep = (Step) mStepArray[mPosition];
         mPlayerView = rootView.findViewById(R.id.videoView);
         shortDescription = rootView.findViewById(R.id.shortDescription);
+
+
         assert mStep != null;
         shortDescription.setText(mStep.getShortDescription());
+        description = rootView.findViewById(R.id.Description);
+        description.setText(mStep.getDescription());
+        previousTV = rootView.findViewById(R.id.navigation_previous);
+        positionTV = rootView.findViewById(R.id.navigation_position);
+        nextTV = rootView.findViewById(R.id.navigation_next);
+
+
         //initialize player
-        if (mTablet){
-        initializePlayer(Uri.parse(mStep.getVideoURL()));}
-        else  {
-            if (getResources().getBoolean(R.bool.isLandscapePhone)) {
+        if (!mStep.getVideoURL().equals("") ){
+            if (mTablet){
+                initializePlayer(Uri.parse(mStep.getVideoURL()));}
+            else  {
+                if (getResources().getBoolean(R.bool.isLandscapePhone)) {
 
                     mPlayerView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -97,35 +109,46 @@ public class OneStepFragment extends Fragment {
                             | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
                     initializePlayer(Uri.parse(mStep.getVideoURL()));
 
-            }
-            else initializePlayer(Uri.parse(mStep.getVideoURL()));
-        }
-        description = rootView.findViewById(R.id.Description);
-        description.setText(mStep.getDescription());
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-               int position = mPosition;
-                switch (menuItem.getItemId()) {
-                    case R.id.navigation_previous:{
-                        position--;
-                        initFragmentTransaction(mStepArray,position);
-                        return true;
-                        }
-
-                    case R.id.navigation_next: {
-                        position++;
-                        initFragmentTransaction(mStepArray,position);
-                        return true;
-                    }
                 }
-                return false;
+
+                else initializePlayer(Uri.parse(mStep.getVideoURL()));
+            }
+        }
+        else {
+
+            mPlayerView.setVisibility(View.GONE);
+
+        }
+
+        nextTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = mPosition;
+                position++;
+                initFragmentTransaction(mStepArray,position);
+
             }
         });
+
+        previousTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = mPosition;
+                position--;
+                initFragmentTransaction(mStepArray,position);
+
+            }
+        });
+
+        positionTV.setText(mPosition +" / "+mStepArray.length);
+
+
+
         return rootView;
     }
 
     private void initializePlayer(Uri mediaUri) {
+
         if (mExoPlayer == null) {
             // create an instance of exoplayer
             TrackSelector trackSelector = new DefaultTrackSelector();

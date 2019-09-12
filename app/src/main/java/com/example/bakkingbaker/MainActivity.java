@@ -18,16 +18,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.i(TAG, "onCreate: ");
-        MainListFragment mainFragment = new MainListFragment();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.mainFragment_id, mainFragment)
-                .commit();
+
+
 
 
 
 
     }
 
+    private void commitFragment() {
+        MainListFragment mainFragment = new MainListFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.mainFragment_id, mainFragment)
+                .commit();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        commitFragment();
+    }
 }

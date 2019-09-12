@@ -13,29 +13,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.bakkingbaker.Adapter.DataItemAdapter;
 import com.example.bakkingbaker.RetrofitAPI.WebService;
 import com.example.bakkingbaker.Room.Category;
 import com.example.bakkingbaker.Room.CategoryDao;
 import com.example.bakkingbaker.Room.RoomDB;
-import com.google.android.material.snackbar.Snackbar;
-
-import org.greenrobot.eventbus.EventBus;
+import com.example.bakkingbaker.Room.WidgetCategory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,7 +37,7 @@ public class MainListFragment extends Fragment {
     private Category[] categories;
     private List<Category> cats = new ArrayList<>();
     CharSequence recipeName;
-    CharSequence ingredients;
+    DataItemAdapter adapter;
     Category cat;
     private List<Category> mCategoryList = new ArrayList<>();
     private RecyclerView rv;
@@ -79,14 +71,9 @@ public class MainListFragment extends Fragment {
 
     @Override
     public void onResume() {
-                executor.execute(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        });
         super.onResume();
-        Log.i(TAG, "onResume: ");
+        rv.setAdapter(adapter);
+
     }
 
     public void requestData(){
@@ -99,10 +86,13 @@ public class MainListFragment extends Fragment {
                     @Override
                     public void run() {
                         categories = response.body();
-
-                        //  Toast.makeText(getActivity(), "received "+categories.length+" from server",Toast.LENGTH_SHORT).show();
-                        mCategoryList = Arrays.asList(categories);
+                        mCategoryList.clear();
+                        mCategoryList.addAll(Arrays.asList(categories)) ;
                         DB = RoomDB.getDatabase(getActivity());
+                        //required database save for widget
+                        WidgetCategory widgetCategory = new WidgetCategory();
+                        widgetCategory.setId(String.valueOf(categories[0].getId()));
+                        DB.widgetDao().insertWidget(widgetCategory);
                         categoryDao = DB.categoryDao();
                         categoryDao.insertAllCategories(mCategoryList);
                         cats = DB.categoryDao().getAllCategories();
@@ -117,6 +107,7 @@ public class MainListFragment extends Fragment {
                 });
 
                 initRecyclerView();
+
             }
 
             @Override
@@ -129,7 +120,10 @@ public class MainListFragment extends Fragment {
     }
 
     private void initRecyclerView(){
-        DataItemAdapter adapter = new DataItemAdapter(getContext(), mCategoryList);
+
+        adapter = new DataItemAdapter(getContext(), mCategoryList);
+        adapter.notifyDataSetChanged();
+
         rv.setAdapter(adapter);
 
     }

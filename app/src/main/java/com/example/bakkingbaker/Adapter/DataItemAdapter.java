@@ -34,6 +34,11 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
     private ViewGroup fragmentContainer;
     public static final String CATEGORY_TAG = "categoryItem";
 
+    public void update(List<Category> categories){
+        this.mCategories = categories ;
+        notifyDataSetChanged();
+    }
+
 
     public DataItemAdapter(Context context, List<Category> categories) {
         this.mContext = context;
@@ -91,10 +96,11 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
                         widgetCategory.setId(String.valueOf(category.getId()));
                         db.widgetDao().insertWidget(widgetCategory);
                       //  Looper.prepare();
-                    //    Toast.makeText(mContext,mContext.getString(R.string.updated),Toast.LENGTH_SHORT).show();
+                    //
                         Log.i("widget id is ", "run: "+db.widgetDao().loadWidget());
                     }
                 });
+                Toast.makeText(mContext,mContext.getString(R.string.updated),Toast.LENGTH_SHORT).show();
 
             }
         });

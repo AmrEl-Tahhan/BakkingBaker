@@ -6,28 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".OneStepFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/videoView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="0dp"
-        app:resize_mode="fixed_width"
-        app:layout_constraintDimensionRatio="H,16:9"
         android:text="@string/hello_blank_fragment"
         app:layout_constraintBottom_toTopOf="@+id/shortDescription"
+        app:layout_constraintDimensionRatio="H,16:9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:resize_mode="fixed_width" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/navigation" />
 
     <TextView
         android:id="@+id/shortDescription"
@@ -36,9 +27,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/shortDescription"
         android:fontFamily="sans-serif"
+        android:text="@string/shortDescription"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/Description"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,15 +40,58 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:textSize="18sp"
         android:fontFamily="sans-serif"
         android:text="@string/Description"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/navs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shortDescription" />
+
+    <LinearLayout
+        android:id="@+id/navs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/navigation_previous"
+
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#E2A3F4"
+            android:drawableLeft="@drawable/previous"
+            android:padding="16dp"
+            android:text="@string/previous"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/navigation_position"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#E2A3F4"
+            android:padding="16dp"
+            android:text="@string/position"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/navigation_next"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#E2A3F4"
+            android:drawableEnd="@drawable/next"
+            android:padding="16dp"
+            android:text="@string/next"
+            android:textAlignment="center" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

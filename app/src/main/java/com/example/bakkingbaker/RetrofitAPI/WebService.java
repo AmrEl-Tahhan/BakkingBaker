@@ -4,6 +4,7 @@ package com.example.bakkingbaker.RetrofitAPI;
 import com.example.bakkingbaker.Room.Category;
 import com.example.bakkingbaker.Room.Ingredient;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -16,8 +17,9 @@ public interface WebService {
     String BASE_URL = "https://d17h27t6h515a5.cloudfront.net/";
     String FEED = "topher/2017/May/59121517_baking/baking.json";
 
-    // 2 - refrofit object
-    Retrofit retrofit = new Retrofit.Builder()
+    // 2 - refrofit object.
+
+        Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build();
