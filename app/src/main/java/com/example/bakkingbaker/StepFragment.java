@@ -29,7 +29,6 @@ public class StepFragment extends Fragment {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static StepFragment newInstance(Category mCategory) {
         StepFragment fragment = new StepFragment();
         Bundle args = new Bundle();

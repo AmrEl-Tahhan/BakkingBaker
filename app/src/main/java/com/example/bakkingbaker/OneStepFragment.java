@@ -1,19 +1,15 @@
 package com.example.bakkingbaker;
-import android.content.res.Configuration;
+
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+
 import com.example.bakkingbaker.Room.Step;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -27,8 +23,7 @@ import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import static com.example.bakkingbaker.Adapter.StepItemAdapter.POSITION_TAG;
 import static com.example.bakkingbaker.Adapter.StepItemAdapter.STEP_TAG;
 import static com.example.bakkingbaker.Adapter.StepItemAdapter.mTablet;

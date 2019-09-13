@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.espresso.IdlingResource;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -25,9 +26,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.example.bakkingbaker.RetrofitAPI.WebService.BASE_URL;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,6 +45,8 @@ public class MainListFragment extends Fragment {
     private List<Category> cats = new ArrayList<>();
     CharSequence recipeName;
     DataItemAdapter adapter;
+    public static OkHttpClient client;
+
     Category cat;
     private List<Category> mCategoryList = new ArrayList<>();
     private RecyclerView rv;
@@ -46,11 +55,9 @@ public class MainListFragment extends Fragment {
     public static final String TAG ="tag";
     public Executor executor = Executors.newSingleThreadExecutor();
 
-
     public MainListFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,11 +67,6 @@ public class MainListFragment extends Fragment {
         rv = view.findViewById(R.id.recyclerView_id);
         requestData();
         Log.i(TAG, "onCreateView: ");
-
-
-
-
-
 
         return view;
     }
@@ -77,7 +79,17 @@ public class MainListFragment extends Fragment {
     }
 
     public void requestData(){
-        WebService webService = WebService.retrofit.create(WebService.class);
+        client = new OkHttpClient();
+        if (BuildConfig.DEBUG){
+            IdlingResources.registerOkHttp(client);
+        }
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build();
+        WebService webService = retrofit.create(WebService.class);
+
         Call<Category[]> call = webService.categories();
         call.enqueue(new Callback<Category[]>() {
             @Override
@@ -115,7 +127,6 @@ public class MainListFragment extends Fragment {
 
             }
         });
-
 
     }
 

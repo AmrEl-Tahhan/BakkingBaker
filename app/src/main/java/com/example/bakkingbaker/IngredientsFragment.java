@@ -35,7 +35,6 @@ public class IngredientsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static IngredientsFragment newInstance(Category mCategory) {
         IngredientsFragment fragment = new IngredientsFragment();
         Bundle args = new Bundle();

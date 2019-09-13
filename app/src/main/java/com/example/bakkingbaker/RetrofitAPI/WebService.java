@@ -1,17 +1,21 @@
 package com.example.bakkingbaker.RetrofitAPI;
 
 
+
 import com.example.bakkingbaker.Room.Category;
-import com.example.bakkingbaker.Room.Ingredient;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
+
+
+
+
 
 public interface WebService {
+    OkHttpClient client = new OkHttpClient();
 
     // 1- define Base and Feed
     String BASE_URL = "https://d17h27t6h515a5.cloudfront.net/";
@@ -19,9 +23,10 @@ public interface WebService {
 
     // 2 - refrofit object.
 
-        Retrofit retrofit = new Retrofit.Builder()
+    Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
             .build();
 
     // 3- how am going to make the request
@@ -29,7 +34,7 @@ public interface WebService {
     Call<Category[]> categories();
 
 
-
-
-    
 }
+
+
+
